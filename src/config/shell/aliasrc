@@ -1,0 +1,150 @@
+#
+# NEOVIM
+#
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias   v="nvim" vimdiff="nvim -d"
+[ -x "$(command -v nvim)" ] && alias  vi="nvim" vimdiff="nvim -d"
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+
+# Use $XINITRC variable if file exists.
+[ -f "$XINITRC" ] && alias startx="startx $XINITRC"
+
+[ -f "$MBSYNCRC" ] && alias mbsync="mbsync -c $MBSYNCRC"
+
+# sudo not required for some system commands
+for command in mount umount sv pacman updatedb su shutdown poweroff reboot ; do
+	alias $command="sudo $command"
+done; unset command
+
+se() {
+	choice="$(find ~/.local/bin -mindepth 1 -printf '%P\n' | fzf)"
+	[ -f "$HOME/.local/bin/$choice" ] && $EDITOR "$HOME/.local/bin/$choice"
+	;}
+
+alias o='a -e xdg-open' # quick opening files with xdg-open
+alias open='xdg-open'
+
+alias j="z"
+
+
+
+#
+# COMMON ALIASES
+#
+
+alias grep='grep --color'
+alias cp="cp -iv"
+alias cpr="cp -ivr"
+alias mv="mv -iv"
+alias md="mkdir -p"
+alias rd="rmdir"
+alias rm="rm -vI"
+alias del="rm -rf"
+
+alias :q="exit"
+alias dots="cd $DOTFILES"
+alias c='clear'
+alias src="exec $SHELL"
+
+alias l="eza -l"
+alias ls="eza"
+alias la="eza -la"
+alias ld="eza -ld .*"
+alias ll="eza -la"
+alias lr="eza -R"
+
+alias ref="shortcuts >/dev/null; source \${XDG_CONFIG_HOME:-\$HOME/.config}/shell/shortcutrc ; source \${XDG_CONFIG_HOME:-\$HOME/.config}/shell/zshnameddirrc"
+
+alias tree="tree -CF"
+alias trem="transmission-remote"
+
+alias Z="zathura"
+
+alias dcw="dc exec --user=laradock workspace zsh"
+alias nginx="sudo systemctl stop nginx"
+
+#
+# APP ALIASES
+#
+
+alias ns="clear && npm start"
+alias nt="clear && npm test"
+alias yt="clear && yarn test"
+alias ys="clear && yarn start"
+alias cat='bat'
+alias lg='lazygit'
+alias fuckit='export THEFUCK_REQUIRE_CONFIRMATION=False; fuck; export THEFUCK_REQUIRE_CONFIRMATION=True'
+alias icat="kitty +kitten icat"
+alias pip="pip3"
+
+alias dv='DEVELOPING=1 nvim'
+alias minimalvim="nvim -u ~/minimal.vim"
+alias notes="cd $SYNC_DIR/notes/neorg/ && nvim"
+alias vimdiff="nvim -d"
+
+#
+# DIRECTORIES
+#
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+#
+# GIT ALIASES
+#
+alias g="git"
+alias gi="git init"
+alias gs="git status"
+alias gl="git log"
+alias gss="git status -s"
+alias gc="git commit -m"
+alias gd="git diff"
+alias gcb='git checkout -b'
+alias gco="git checkout"
+alias ga='git add'
+alias gaa='git add --all'
+alias gb='git branch'
+alias gbD='git branch -D'
+alias gbl='git blame -b -w'
+alias gbr='git branch --remote'
+alias gp='git push'
+
+
+#
+# Pacman yay
+#
+alias ys="yay -Sy"
+alias yu="yay -Syu"
+alias yq="yay -Q"
+alias yr="yay -Rs"
+
+
+#
+# Laravel Artisan
+#
+
+alias a="php artisan"
+alias art="php artisan"
+alias "php artisan cc"="php artisan clear-compiled"
+alias "php artisan me"="php artisan make:event"
+alias "php artisan me"="php artisan make:event"
+alias "php artisan mj"="php artisan make:job"
+alias "php artisan mm"="php artisan make:migration"
+alias "php artisan mr"="php artisan make:request"
+alias "php artisan ms"="php artisan make:seeder"
+alias "php artisan mt"="php artisan make:test"
+
+alias "php artisan ia"="php artisan infyom:api"
+alias "php artisan is"="php artisan infyom:scaffold"
+alias "php artisan isa"="php artisan infyom:api_scaffold"
+alias "php artisan iM"="php artisan infyom:migration"
+alias "php artisan im"="php artisan infyom:model"
+alias "php artisan ip"="php artisan infyom:publish"
+alias "php artisan ir"="php artisan infyom:repository"
+alias "php artisan iR"="php artisan infyom:rollback"
+alias "php artisan ac"="php artisan infyom.api:controller"
+alias "php artisan ar"="php artisan infyom.api:request"
+alias "php artisan at"="php artisan infyom.api:tests"
+alias "php artisan isc"="php artisan infyom.scaffold:controller"
+alias "php artisan isr"="php artisan infyom.scaffold:request"
+alias "php artisan isv"="php artisan infyom.scaffold:views"

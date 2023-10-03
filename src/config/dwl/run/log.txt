@@ -1,0 +1,17 @@
+eDP-1 title 
+eDP-1 appid 
+eDP-1 fullscreen 
+eDP-1 floating 
+eDP-1 selmon 0
+eDP-1 tags 0 1 0 0
+eDP-1 layout 
+status Oct 03  🕗 08:28pm
+status 📶 40%  Oct 03  🕗 08:28pm
+status 🔊 91%  📶 40%  Oct 03  🕗 08:28pm
+status 🔊 91%   29%  📶 40%  Oct 03  🕗 08:28pm
+status   🔊 91%   29%  📶 40%  Oct 03  🕗 08:28pm
+status Oct 03 🕗 08:28pm
+status  29% Oct 03 🕗 08:28pm
+status  29% Oct 03 🕗 08:28pm
+status  29% 📶 40% Oct 03 🕗 08:28pm
+status 🔊 91%  29% 📶 40% Oct 03 🕗 08:28pm

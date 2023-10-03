@@ -1,0 +1,19 @@
+#!/bin/env bash
+
+# Function that will print nth letter of text from clipboard
+# Usefull when websites uses partial passwords for login
+function get_chars() {
+  local secret="$(wl-paste)"
+  read -a positions <<<"$(bemenu -p 'Enter positions separateed by spaces ' --log-level=none)"
+
+  chars=()
+  for position in "${positions[@]}"; do
+    chars+=("${secret:position-1:1}")
+  done
+
+  echo "${chars[*]}"
+}
+
+get_chars
+echo "Press Ctrl+D close"
+bash --noprofile

@@ -1,0 +1,42 @@
+#!/bin/sh
+
+case $XDG_SESSION_TYPE in
+"xorg")
+  unclutter --idle 2.5 &
+  picom &
+  nitrogen --restore &
+  dwmblocks &
+  unclutter &
+  systemctl --user start xdg-desktop-portal &
+  dunst &
+  deluged &
+  ;;
+
+"wayland")
+
+  # Notifications
+  dunst &
+
+  # Wallpaper
+  # wbg "$HOME/.local/share/bg" &
+
+  # Foot terminal server
+  # foot --server &
+
+  # Check pacman updates
+  # pacman -Sy &
+
+  # dwlb bar
+  # dwlb &
+
+  # pipewire &
+
+  # wl-paste --watch clipman store &
+
+  # gammastep &
+
+  # Status bar
+  # killall someblocks
+  # someblocks -p | wl-set-status &
+  ;;
+esac

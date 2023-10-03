@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Btop
+GenericName=Process Viewer
+Icon=htop
+Exec=/usr/bin/kitty btop --preset 1
+Terminal=false
+Categories=System;Monitor;ConsoleOnly;
+Keywords=system;process;task

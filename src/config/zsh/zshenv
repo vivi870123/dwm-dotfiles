@@ -1,0 +1,153 @@
+# vim:ft=zsh
+
+#-------------------------------------------------------------------------------
+#       ENV VARIABLES
+#-------------------------------------------------------------------------------
+# PATH.
+# (N-/): do not register if the directory does not exists
+# (Nn[-1]-/)
+#
+#  N   : NULL_GLOB option (ignore path if the path does not match the glob)
+#  n   : Sort the output
+#  [-1]: Select the last item in the array
+#  -   : follow the symbol links
+#  /   : ignore files
+#  t   : tail of the path
+# CREDIT: @ahmedelgabri
+path+=(
+  "/usr/local/bin"
+  "${HOME}/.local/bin(N-/)"
+  "$HOME/.local/share/bob/nvim-bin"
+)
+
+# set LANG
+export LC_ALL=en_GB.UTF-8
+export LANG=en_GB.UTF-8
+
+# Default programs:
+export EDITOR="nvim"
+export BROWSER="org.mozilla.firefox"
+export READER="zathura"
+export FILE="lf"
+export MUSIC="cmus"
+export AUDIO="pulsemixer"
+export PROCESS="htop"
+export TORRENT="transmission-remote-gtk"
+
+
+export TERMINAL="foot"
+export RUN_LAUNCHER="bemenu-run"
+export MENU="bemenu"
+export BUS_BROWSER="brave --ozone-platform=wayland"
+export MOZ_ENABLE_WAYLAND=1
+export WMBLOCKS="someblocks"
+export BEMENU_BACKEND="wayland"
+
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+export SUDO_ASKPASS="$HOME/.local/bin/bemenupass"
+
+export MOZ_DBUS_REMOTE=1 # fixes firefox is already running, but is not responding
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Adds `~/.local/bin` to $PATH
+export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
+
+# less/man colors
+export LESS=-R
+export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
+a="${a%_}"
+export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
+a="${a%_}"
+export LESS_TERMCAP_me="$(printf '%b' '[0m')"
+a="${a%_}"
+export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
+a="${a%_}"
+export LESS_TERMCAP_se="$(printf '%b' '[0m')"
+a="${a%_}"
+export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
+a="${a%_}"
+export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
+a="${a%_}"
+
+# ~/ Clean-up:
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
+export LESSHISTFILE="-"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export ANSIBLE_CONFIG="$XDG_CONFIG_HOME/ansible/ansible.cfg"
+export HISTFILE="$XDG_DATA_HOME/history"
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
+export ZIM_HOME="$XDG_CACHE_HOME/zim"
+
+export NOTES_DIR="~/Documents/notes"
+export SYNC_DIR="$HOME/Dropbox"
+export DOTFILES="$HOME/.dotfiles"
+export PROJECTS_DIR="$HOME/projects"
+export PERSONAL_PROJECTS_DIR="$PROJECTS_DIR/personal"
+export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
+
+export N_PREFIX="$HOME/.local/share/n"
+if which n >/dev/null; then
+  path+=("$N_PREFIX/bin")
+fi
+
+[[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"
+
+# preferred editor for local and remote sessions
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+  export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+  export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+else
+  export VISUAL="nvim"
+  export EDITOR="nvim"
+fi
+
+if ! type "$bat" >/dev/null; then
+  export BAT_THEME="TwoDark"
+fi
+
+if which sheldon >/dev/null; then
+  export SHELDON_CONFIG_DIR=$XDG_CONFIG_HOME/zsh # https://github.com/rossmacarthur/sheldon
+fi
+
+# @see: https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
+if which rg >/dev/null; then
+  export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/rg/.ripgreprc"
+fi
+
+if which wget >/dev/null; then
+  export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+fi
+
+export MANPATH="/usr/local/man:$MANPATH"
+if which nvim >/dev/null; then
+  export MANPAGER='nvim +Man!'
+fi
+
+if which go >/dev/null; then
+  export GOPATH="$XDG_DATA_HOME/go"
+  export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
+  path+=("$GOPATH/bin")
+fi
+
+if which flatpak >/dev/null; then
+  path+=(
+  '/var/lib/flatpak/exports/share'
+  "$HOME/.local/share/flatpak/exports/share"
+)
+fi
+
+if which bemenu >/dev/null; then
+  source $XDG_CONFIG_HOME/bemenu/bemenurc
+fi
+
+# remove duplicate entries from $PATH
+typeset -U PATH path

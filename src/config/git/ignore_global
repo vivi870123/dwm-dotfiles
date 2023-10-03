@@ -1,0 +1,42 @@
+*~
+tags
+tags.lock
+tags.temp
+*.un~
+Session.vim
+# Compiled source
+*.com
+*.class
+*.dll
+*.o
+*.so
+.lvimrc
+.idea
+*config.local
+*gitconfig.local
+
+
+# Logs and databases
+*.log
+*.sqlite
+
+# VSCode workspaces
+*.code-workspace
+.vscode
+*.doc#
+
+.settings/
+
+# Spell files (ignore all but those my personal dictionary)
+*.add
+*.add.spl
+!/.dotfiles/**/*.add
+
+.nvim.lua
+.localrc.lua
+.ignore
+
+.ccls-cache/
+.private
+
+# vim:filetype=conf

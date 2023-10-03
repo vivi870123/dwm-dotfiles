@@ -1,0 +1,6 @@
+.git/*
+zsh/plugins/*
+.dotfiles/*
+vendor/*
+node_modules/*
+.yarn

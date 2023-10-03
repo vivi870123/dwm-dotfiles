@@ -1,0 +1,30 @@
+#!/bin/sh
+
+WIREPLUMBER_PID=$(pgrep wireplumber)
+GAMMASTEP_PID=$(pgrep gammastep)
+MPDRIS_PID=$(pgrep -f mpDris2)
+# LXPOLKIT_PID=$(pgrep lxpolkit)
+PIPEWIRE_PID=$(pgrep -f pipewire)
+PIPEWIRE_PULSE_PID=$(pgrep -f pipewire-pulse)
+
+# pipewire
+[ -z "$PIPEWIRE_PID" ] && pipewire &
+[ -z "$PIPEWIRE_PULSE_PID" ] && pipewire-pulse &
+[ -z "$WIREPLUMBER_PID" ] && wireplumber &
+
+# dunst
+killall dunst
+dunst &
+
+pacman -Sy &
+
+wbg "/home/chris/.local/share/bg" &
+
+# redshift
+[ -z "$GAMMASTEP_PID" ] && gammastep &
+
+# wl-paste --watch clipman store
+foot --server &
+
+someblocks | "$HOME/.config/dwl/scripts/wl-set-status" &
+# someblocks | dwlb -status all &

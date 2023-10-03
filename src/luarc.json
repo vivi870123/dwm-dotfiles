@@ -1,0 +1,39 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "Lua.diagnostics.disable": [
+    "missing-parameter",
+    "return-type-mismatch",
+    "param-type-mismatch",
+    "cast-local-type"
+  ],
+  "Lua.workspace.checkThirdParty": false,
+  "diagnostics.globals": [
+    "snippet",
+    "f",
+    "i",
+    "t",
+    "c",
+    "d",
+    "p",
+    "sn",
+    "rep",
+    "fmt",
+    "mines",
+    "map",
+    "augroup",
+    "command",
+    "bit",
+    "vim",
+    "python",
+    "P",
+    "R",
+    "RELOAD",
+    "PASTE",
+    "STORAGE",
+    "use",
+    "describe",
+    "it",
+    "before_each",
+    "assert"
+  ]
+}

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# This script is the SUDO_ASKPASS variable, meaning that it will be used as a
+# password prompt if needed.
+
+# bemenu -x -p "$1" <&- && echo
+
+bemenu \
+  --prompt "$1" \
+  --password \
+  --no-exec \
+  </dev/null
+# must close stdin, otherwise bemenu hangs

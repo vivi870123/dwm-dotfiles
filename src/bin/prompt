@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# A bemenu binary prompt script.
+# Gives a bemenu prompt labeled with $1 to perform command $2.
+# $3 and $4 are also optional for lines and width
+# For example:
+# `./prompt "Do you want to shutdown?" "shutdown -h now"`
+
+if [ -n "$3" ]; then
+  LINES="$3"
+else
+  LINES=2
+fi
+
+if [ -n "$4" ]; then
+  WIDTH="$4"
+else
+  WIDTH=10
+fi
+
+ANS=$(echo -e 'No\nYes' | bemenu -p "$1 ")
+[[ $ANS == 'Yes' ]] && $2
