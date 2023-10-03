@@ -5,13 +5,29 @@ eDP-1 floating
 eDP-1 selmon 0
 eDP-1 tags 0 1 0 0
 eDP-1 layout 
-status Oct 03  🕗 08:28pm
-status 📶 40%  Oct 03  🕗 08:28pm
-status 🔊 91%  📶 40%  Oct 03  🕗 08:28pm
-status 🔊 91%   29%  📶 40%  Oct 03  🕗 08:28pm
-status   🔊 91%   29%  📶 40%  Oct 03  🕗 08:28pm
-status Oct 03 🕗 08:28pm
-status  29% Oct 03 🕗 08:28pm
-status  29% Oct 03 🕗 08:28pm
-status  29% 📶 40% Oct 03 🕗 08:28pm
-status 🔊 91%  29% 📶 40% Oct 03 🕗 08:28pm
+status Oct 03  🕙 10:13pm
+status   Oct 03  🕙 10:13pm
+status   📶 60%  Oct 03  🕙 10:13pm
+status   🔊 91%  📶 60%  Oct 03  🕙 10:13pm
+status   🔊 91%   ❗5%  📶 60%  Oct 03  🕙 10:13pm
+status Oct 03 🕙 10:13pm
+status  ❗5% Oct 03 🕙 10:13pm
+status 🔊 91%  ❗5% Oct 03 🕙 10:13pm
+status 🔊 91%  ❗5% Oct 03 🕙 10:13pm
+status 🔊 91%  ❗5% 📶 60% Oct 03 🕙 10:13pm
+status   🔊 91%   ❗5%  📶 57%  Oct 03  🕙 10:13pstatus 🔊 91%  ❗5% 📶 57% Oct 03 🕙 10:12pm
+status 🔊 91%  ❗5% 📶 55% Oct 03 🕙 10:12pm
+status 🔊 91%  ❗5% 📶 58% Oct 03 🕙 10:12pm
+status 🔊 91%  ❗5% 📶 54% Oct 03 🕙 10:12pm
+status 🔊 91%  ❗5% 📶 58% Oct 03 🕙 10:12pm
+status 🔊 91%  ❗5% 📶 58% Oct 03 🕙 10:13pm
+status 🔊 91%  ❗5% 📶 68% Oct 03 🕙 10:13pm
+status 🔊 91%  ❗5% 📶 64% Oct 03 🕙 10:13pm
+58%  Oct 03  🕙 10:13pm
+status 🔊 91%  ❗5% 📶 58% Oct 03 🕙 10:13pm
+status   🔊 91%   ❗5%  📶 68%  Oct 03  🕙 10:13pm
+status 🔊 91%  ❗5% 📶 68% Oct 03 🕙 10:13pm
+status   🔊 91%   ❗5%  📶 64%  Oct 03  🕙 10:13pm
+status 🔊 91%  ❗5% 📶 64% Oct 03 🕙 10:13pm
+status   🔊 91%   ❗5%  📶 64%  Oct 03  🕙 10:14pm
+status 🔊 91%  ❗5% 📶 64% Oct 03 🕙 10:14pm

@@ -168,7 +168,8 @@ config_symlink() {
 }
 
 desktop_symlink() {
-  execute "rm -rf $HOME/.zshenv"
+  execute "rm -rf $HOME/.profile"
+  execute "rm -rf $HOME/.xinitrc"
   execute "rm -rf $HOME/.luarc.json"
   execute "rm -rf $HOME/.gitignore"
   execute "rm -rf $HOME/.stylua.toml"
@@ -176,12 +177,12 @@ desktop_symlink() {
   execute "rm -rf $HOME/.gitconfig"
   execute "rm -rf $HOME/.gitconfig.local"
 
-  execute "ln -sf $DOTFILES/src/config/zsh/zshenv $HOME/.zshenv"
+  execute "ln -sf $DOTFILES/src/config/shell/profile $HOME/.zprofile"
+  execute "ln -sf $DOTFILES/src/config/x11/xinitrc $HOME/.xinitrc"
   execute "ln -sf $DOTFILES/src/luarc.json $HOME/.luarc.json"
   execute "ln -sf $DOTFILES/src/gitignore $HOME/.gitignore"
   execute "ln -sf $DOTFILES/src/stylua.toml $HOME/.stylua.toml"
   execute "ln -sf $DOTFILES/src/ignore $HOME/.ignore"
-  execute "ln -sf $HOME/.config/dwl/scripts/startw $HOME/.local/bin"
   execute "ln -sf $HOME/.config/git/config $HOME/.gitconfig"
   execute "ln -sf $HOME/.config/git/config.local $HOME/.gitconfig.local"
 }

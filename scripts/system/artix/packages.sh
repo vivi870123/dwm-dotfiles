@@ -38,7 +38,22 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 # Install Pacman packages
 #==================================
 
+# dmenu clone from suckless
+
 print_title "Installing main packages"
+pacman_install "xorg-server" "xorg-server"         # is the graphical server. This first one may take a while as it pulls many other depen…
+pacman_install "xorg-xwininfo" "xorg-xwininfo"     # allows querying information about windows."
+pacman_install "xorg-xinit" "xorg-xinit"           # "starts the graphical server."
+pacman_install "xorg-xprop" "xorg-xprop"           # "is a tool for detecting window properties"
+pacman_install "xcape" "xcape"                     # "gives the special escape/super mappings of LARBS."
+pacman_install "xclip" "xclip"                     # "allows for copying and pasting from the command line."
+pacman_install "xdotool" "xdotool"                 # "provides window action utilities on the command line."
+pacman_install "xorg-xbacklight" "xorg-xbacklight" # "enables changing screen brightness levels."
+pacman_install "arandr" "arandr"                   # "allows the user to customize monitor arrangements."
+pacman_install "picom" "picom"                     # "is for transparency and removing screen-tearing."
+pacman_install "slock" "slock"                     # "allows you to lock your computer"
+pacman_install "redshift" "redshift"               # Adjust the color temperature of your screen according to your surroundings.
+
 pacman_install "polkit" "polkit"                              # "manages user policies."
 pacman_install "gnome-keyring" "gnome-keyring"                # serves as the system keyring.
 pacman_install "librewolf" "librewolf"                        # "Browser"
@@ -89,7 +104,6 @@ pacman_install "tldr" "tldr"                                  # Command line cli
 pacman_install "neofetch" "neofetch"                          #  A CLI system information tool written in BASH that supports displaying images.
 pacman_install "transmission" "transmission-runit"            # BitTorrent client (CLI tools, daemon and web client)
 pacman_install "networkmanager" "networkmanager-runit"        # BitTorrent client (CLI tools, daemon and web client)
-pacman_install "gammastep" "gammastep"                        # Adjust the color temperature of your screen according to your surroundings.
 pacman_install "bemenu" "bemenu"                              # Dynamic menu library and client program inspired by dmenu
 pacman_install "zoxide" "zoxide"                              # A smarter cd command for your terminal
 pacman_install "wl-roots" "wl-roots"                          # Modular Wayland compositor library
@@ -115,7 +129,6 @@ aur_install "wbg" "wbg"                                       # Wallpaper applic
 aur_install "pamixer" "pamixer"                               # Pulseaudio command-line mixer like amixer
 aur_install "clipman" "clipman"                               # A simple clipboard manager for Wayland
 aur_install "wl-color-picker" "wl-color-picker"               # A wayland color picker that also works on wlroots
-aur_install "wlr-randr" "wlr-randr"                           # Utility to manage outputs of a Wayland compositor
 
 aur_install "arc-gruvbox" "gtk-theme-arc-gruvbox-git"           # dark GTK theme
 aur_install "whitesur-icon-theme " "whitesur-icon-theme "       # MacOS Big Sur like icon theme for linux desktops

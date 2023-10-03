@@ -1,5 +1,6 @@
 # vim:ft=zsh
 
+
 #-------------------------------------------------------------------------------
 #       ENV VARIABLES
 #-------------------------------------------------------------------------------
@@ -26,22 +27,14 @@ export LANG=en_GB.UTF-8
 
 # Default programs:
 export EDITOR="nvim"
-export BROWSER="org.mozilla.firefox"
+export TERMINAL="kitty"
+export BROWSER="firefox"
 export READER="zathura"
 export FILE="lf"
 export MUSIC="cmus"
 export AUDIO="pulsemixer"
-export PROCESS="htop"
+export PROCESS="btop"
 export TORRENT="transmission-remote-gtk"
-
-
-export TERMINAL="foot"
-export RUN_LAUNCHER="bemenu-run"
-export MENU="bemenu"
-export BUS_BROWSER="brave --ozone-platform=wayland"
-export MOZ_ENABLE_WAYLAND=1
-export WMBLOCKS="someblocks"
-export BEMENU_BACKEND="wayland"
 
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
 export SUDO_ASKPASS="$HOME/.local/bin/bemenupass"
@@ -71,9 +64,11 @@ export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 a="${a%_}"
 
 # ~/ Clean-up:
+export XDG_DESKTOP_DIR="$HOME/"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XINITRC="$HOME/.config/x11/xinitrc"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
 export LESSHISTFILE="-"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
@@ -92,6 +87,7 @@ export SYNC_DIR="$HOME/Dropbox"
 export DOTFILES="$HOME/.dotfiles"
 export PROJECTS_DIR="$HOME/projects"
 export PERSONAL_PROJECTS_DIR="$PROJECTS_DIR/personal"
+
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
 
 export N_PREFIX="$HOME/.local/share/n"
@@ -127,6 +123,7 @@ if which wget >/dev/null; then
   export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 fi
 
+
 export MANPATH="/usr/local/man:$MANPATH"
 if which nvim >/dev/null; then
   export MANPAGER='nvim +Man!'
@@ -134,20 +131,28 @@ fi
 
 if which go >/dev/null; then
   export GOPATH="$XDG_DATA_HOME/go"
-  export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
   path+=("$GOPATH/bin")
 fi
 
 if which flatpak >/dev/null; then
   path+=(
-  '/var/lib/flatpak/exports/share'
-  "$HOME/.local/share/flatpak/exports/share"
-)
+    '/var/lib/flatpak/exports/share'
+    "$HOME/.local/share/flatpak/exports/share"
+    )
 fi
 
 if which bemenu >/dev/null; then
   source $XDG_CONFIG_HOME/bemenu/bemenurc
 fi
 
+
 # remove duplicate entries from $PATH
 typeset -U PATH path
+
+ unset XDG_RUNTIME_DIR
+# shellcheck disable=SC2155
+ export XDG_RUNTIME_DIR=$(mktemp -d /tmp/$(id -u)-runtime-dir.XXX)
+
+
+# Switch escape and caps if tty and no passwd required:
+# sudo -n loadkeys ${XDG_DATA_HOME:-$HOME/.local/share}/mines/ttymaps.kmap 2>/dev/null
