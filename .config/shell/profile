@@ -1,0 +1,129 @@
+# vim:ft=zsh
+#-------------------------------------------------------------------------------
+#       ENV VARIABLES
+#-------------------------------------------------------------------------------
+# PATH.
+# (N-/): do not register if the directory does not exists
+# (Nn[-1]-/)
+#
+#  N   : NULL_GLOB option (ignore path if the path does not match the glob)
+#  n   : Sort the output
+#  [-1]: Select the last item in the array
+#  -   : follow the symbol links
+#  /   : ignore files
+#  t   : tail of the path
+# CREDIT: @ahmedelgabri
+
+# Default programs:
+export EDITOR="nvim"
+export TERMINAL="st"
+export BROWSER="librewolf"
+export FILE="lf"
+
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
+export QT_QPA_PLATFORMTHEME="gtk2" # Have QT use gtk2 theme.
+export MOZ_USE_XINPUT2="1" # Mozilla smooth scrolling/touchpads.
+export _JAVA_AWT_WM_NONREPARENTING=1 # Fix for Java applications in dwm
+
+# ~/ Clean-up:
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
+export LESSHISTFILE="-"
+export INPUTRC="$XDG_CONFIG_HOME/shell/inputrc"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
+export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export ANSIBLE_CONFIG="$XDG_CONFIG_HOME/ansible/ansible.cfg"
+export HISTFILE="$XDG_DATA_HOME/history"
+
+export NOTES_DIR="~/Documents/notes"
+export SYNC_DIR="$HOME/Dropbox"
+export DOTFILES="$HOME/.dotfiles"
+export PROJECTS_DIR="$HOME/projects"
+export PERSONAL_PROJECTS_DIR="$PROJECTS_DIR/personal"
+
+# less/man colors
+export LESS=-R
+export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
+a="${a%_}"
+export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
+a="${a%_}"
+export LESS_TERMCAP_me="$(printf '%b' '[0m')"
+a="${a%_}"
+export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
+a="${a%_}"
+export LESS_TERMCAP_se="$(printf '%b' '[0m')"
+a="${a%_}"
+export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
+a="${a%_}"
+export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
+a="${a%_}"
+
+# @see: https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
+if which rg >/dev/null; then
+  export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/rg/.ripgreprc"
+fi
+
+if which wget >/dev/null; then
+  export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+fi
+
+if which go >/dev/null; then
+  export GOPATH="$XDG_DATA_HOME/go"
+  path+=("$GOPATH/bin")
+fi
+
+if which flatpak >/dev/null; then
+  "/var/lib/flatpak/exports/share"
+  "$HOME/local/share/flatpak/exports/share"
+fi
+
+path+=(
+  "/usr/local/bin"
+  "${HOME}/.local/bin(N-/)"
+
+)
+
+export MANPATH="/usr/local/man:$MANPATH"
+if which nvim >/dev/null; then
+  export MANPAGER='nvim +Man!'
+fi
+
+# you may need to manually set your language environment
+export LC_ALL=en_GB.UTF-8
+export LANG=en_GB.UTF-8
+
+# preferred editor for local and remote sessions
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+  export VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+  export EDITOR="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+else
+  export VISUAL="nvim"
+  export EDITOR="nvim"
+fi
+
+export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
+
+# Setting ag as the default source for fzf
+# --hidden: Search hidden files and folders
+# --follow: Follow symlinks
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS="--prompt='» ' --pointer='->' --marker='✓ ' --reverse --tabstop 2 --multi --color=bg+:-1,marker:010 --bind '?:toggle-preview'"
+export FZF_PREVIEW_COMMAND="bat --style=numbers,changes --wrap never --color always {} || cat {} || tree -C {}"
+
+# Don't open FZF in a separate split in tmux
+export FZF_TMUX=0
+
+[ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ] && setsid shortcuts >/dev/null 2>&1
+
+# Start graphical server on user's current tty if not already running.
+[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx "$XINITRC"
