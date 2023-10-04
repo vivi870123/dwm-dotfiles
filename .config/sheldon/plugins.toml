@@ -1,0 +1,68 @@
+# Sheldon configuration file
+#
+# See https://sheldon.cli.rs
+
+[templates]
+defer = """{{ hooks | get: "pre" | nl }}{% for file in files %}zsh-defer source "{{ file }}"\n{% endfor %}{{ hooks | get: "post" | nl }}"""
+defer-more = """{{ hooks | get: "pre" | nl }}{% for file in files %}zsh-defer -t 0.5 source "{{ file }}"\n{% endfor %}{{ hooks | get: "post" | nl }}"""
+
+# Completions
+# -----------
+
+[plugins.docker-zsh-completion]
+github = "greymd/docker-zsh-completion"
+
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+
+# Sourced
+# -------
+
+# The history plugin doesn't like being deferred, not sure why.
+[plugins.history]
+github = "ohmyzsh/ohmyzsh"
+dir = "lib"
+hooks.pre = """
+export HIST_STAMPS="yyyy-mm-dd"
+export HISTSIZE=250000
+export SAVESIZE=25000
+"""
+
+[plugins.starship]
+inline = 'eval "$(starship init zsh)"'
+
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+
+# Deferred plugins
+# ----------------
+
+[plugins.autoenv]
+github = "zpm-zsh/autoenv"
+apply = ["defer"]
+
+[plugins.ohmyzsh-lib]
+github = "ohmyzsh/ohmyzsh"
+dir = "lib"
+use = ["{clipboard,completion,functions,git,key-bindings,termsupport,theme-and-appearance}.zsh"]
+apply = ["defer"]
+
+[plugins.ohmyzsh-plugins]
+github = "ohmyzsh/ohmyzsh"
+dir = "plugins"
+use = ["{copybuffer,git,pip}/*.plugin.zsh"]
+apply = ["defer"]
+
+[plugins.zsh-you-should-use]
+github = "MichaelAquilina/zsh-you-should-use"
+apply = ["defer"]
+hooks.pre = "export YSU_MODE=ALL"
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+use = ["{{ name }}.zsh"]
+apply = ["defer"]
+
+[plugins.zsh-syntax-highlighting]
+github = 'zsh-users/zsh-syntax-highlighting'
+apply = ["defer"]

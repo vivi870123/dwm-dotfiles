@@ -9,43 +9,14 @@ __DOTS[ITALIC_OFF]=$'\e[23m'
 # https://www.topbug.net/blog/2016/10/11/speed-test-check-the-existence-of-a-command-in-bash-and-zsh/
 exists() { (( $+commands[$1] )); }
 
-_comp_options+=(globdots) # Include hidden files.
+# Source all the things ✨
+eval "$(sheldon source)"
 
-if exists brew; then
-  fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
-fi
+_comp_options+=(globdots) # Include hidden files.
 
 # Enable colors and change prompt:
 autoload -U colors && colors # Load colors
 stty stop undef              # Disable ctrl-s to freeze terminal.
-
-#-------------------------------------------------------------------------------
-# Zim Configuration
-#-------------------------------------------------------------------------------
-# Use degit instead of git as the default tool to install and update modules.
-zstyle ':zim:zmodule' use 'degit'
-
-
-ZIM_HOME="$HOME/.cache/zim"
-# Download zimfw plugin manager if missing.
-if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  if (( ${+commands[curl]} )); then
-    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  else
-    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  fi
-fi
-
-# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  source ${ZIM_HOME}/zimfw.zsh init -q
-fi
-
-# Initialize modules.
-source ${ZIM_HOME}/init.zsh
-
 
 #-------------------------------------------------------------------------------
 #               Completion
@@ -208,7 +179,6 @@ done
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
 
-# Basic auto/tab complete:
 
 #-------------------------------------------------------------------------------
 #  PLUGINS
@@ -236,12 +206,12 @@ if exists fnm; then
 	eval "$(fnm env --use-on-cd)"
 fi
 
+if exists nvm; then
+	source /usr/share/nvm/init-nvm.sh
+fi
+
 # source cargo
 [ -f "$CARGO_HOME/env" ] && . "$CARGO_HOME/env"
-
-
-# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-#. $XDG_DATA_HOME/asdf/asdf.sh
 
 #-------------------------------------------------------------------------------
 #               Mappings
@@ -264,7 +234,5 @@ lfcd () {
     fi
 }
 bindkey -s '^o' '^ulfcd\n'
-
-alias nvim="~/.local/share/bob/nvim-bin/nvim"
 
 export N_PREFIX="$HOME/.local/share/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
